@@ -1,6 +1,6 @@
 require_relative '../test_helper'
 
-class UserCreatesTaskTest < Minitest::Test
+class UserCreatesSkillTest < Minitest::Test
   include Capybara::DSL
   include TestHelpers
 
@@ -14,14 +14,14 @@ class UserCreatesTaskTest < Minitest::Test
     # Then I should see my task
 
     visit '/'
-    click_link("New Task")
-    fill_in("task[title]", with: "pizza")
-    fill_in("task[description]", with: "is juicy")
+    click_link("New Skill")
+    fill_in("skill[name]", with: "pizza")
+    fill_in("skill[status]", with: "is juicy")
     click_button("submit")
 
-    assert_equal "/tasks", current_path
+    assert_equal "/skills", current_path
 
-    within("#tasks") do
+    within("#skills") do
       assert page.has_content?("pizza")
     end
     save_and_open_page

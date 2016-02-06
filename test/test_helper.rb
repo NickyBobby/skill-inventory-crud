@@ -6,28 +6,43 @@ require 'minitest/pride'
 require 'capybara/dsl'
 require 'tilt/erb'
 
-Capybara.app = TaskManagerApp
+Capybara.app = SkillInventoryApp
 
 Capybara.save_and_open_page_path = "tmp/capybara"
 
+DatabaseCleaner[:sequel, {:connection => Sequel.sqlite("db/skill_inventory_test.sqlite3")}].strategy = :truncation
 
 module TestHelpers
-  def teardown
-    task_manager.delete_all
+
+  def setup
+    DatabaseCleaner.start
     super
   end
 
-  def create_tasks(num)
+  def teardown
+    DatabaseCleaner.clean
+    super
+  end
+
+  def create_skills(num)
     num.times do |i|
-      task_manager.create({
-        title:       "a title #{i+1}",
-        description: "a description #{i+1}"
-        })
+      skill_inventory.database.from(:skills).insert(
+        name:       "a skill #{i+1}",
+        status: "a status #{i+1}"
+        )
     end
   end
 
-  def task_manager
-    database = YAML::Store.new('db/task_manager_test')
-    @task_manager ||= TaskManager.new(database)
+  def skill_inventory
+    database = Sequel.sqlite('db/skill_inventory_test.sqlite3')
+    @skill_inventory ||= SkillInventory.new(database)
   end
+end
+
+Capybara.app = SkillInventoryApp
+Capybara.save_and_open_page_path = 'tmp/capybara'
+
+class FeatureTest < Minitest::Test
+  include Capybara::DSL
+  include TestHelpers
 end

@@ -1,4 +1,12 @@
-<h1>My Skills</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/application.css">
+  <link rel="stylesheet" href="/bootstrap.css">
+  <title>Skill Inventory</title>
+</head>
+<body>
+  <h1>My Skills</h1>
 
 <a href="/skills/new">New Skill</a>
 
@@ -10,21 +18,22 @@
     <th>Status</th>
     <th>Actions</th>
   </tr>
-<% @skills.each do |skill| %>
 <div id="skills">
-  <h3><tr><td><%= skill.id %></td>
-    <td><%= skill.name %></td>
+  <h3><tr><td>344</td>
+    <td>pizza</td>
     <td>
-      <%= skill.status %>
+      is juicy
     </td>
     <td>
-      <a href="/skills/<%= skill.id %>/edit">Edit</a>
-      <form action="/skills/<%= skill.id %>" method="post">
+      <a href="/skills/344/edit">Edit</a>
+      <form action="/skills/344" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="submit" value="Delete">
       </form>
     </td>
   </tr></h3>
 </div>
-<% end %>
 </table>
+
+</body>
+</html>
