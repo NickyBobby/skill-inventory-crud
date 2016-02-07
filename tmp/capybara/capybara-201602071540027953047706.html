@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/application.css">
+  <link rel="stylesheet" href="/bootstrap.css">
+  <title>Skill Inventory</title>
+</head>
+<body>
+  <h1>My Skills</h1>
+
+<a href="/skills/new">New Skill</a>
+
+
+<table class="table table-hover table-condensed">
+  <tr>
+    <th>Number</th>
+    <th>Skill</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+<div id="skills">
+  <h3><tr><td>372</td>
+    <td>pizza</td>
+    <td>
+      is juicy
+    </td>
+    <td>
+      <a href="/skills/372/edit">Edit</a>
+      <form action="/skills/372" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
+      </form>
+    </td>
+  </tr></h3>
+</div>
+</table>
+
+</body>
+</html>

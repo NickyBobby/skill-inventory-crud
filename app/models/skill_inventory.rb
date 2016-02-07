@@ -11,18 +11,8 @@ class SkillInventory
     database.from(:skills).insert(skill)
   end
 
-  def raw_skills
-    database.transaction do
-      database['skills'] || []
-    end
-  end
-
   def all
     database.from(:skills).to_a.map { |data| Skill.new(data) }
-  end
-
-  def raw_skill(id)
-    raw_skills.find { |skill| skill["id"] == id }
   end
 
   def dataset
